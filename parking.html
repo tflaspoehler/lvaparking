@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Markers</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  </head>
+  <body>
+    <div class="gmap" id="map"></div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPCISCqptlowUQP_jwhIMaSqcr121mG74&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+<script>
+function initMap() {
+	const myLatLng = { lat: 36.1684717436345, lng: -115.15676233092137 };
+
+	const styles = [{
+	    stylers: []
+	}, {
+	    featureType: "road",
+	    elementType: "geometry",
+	    stylers: [{
+	        lightness: 100
+	    }, {
+	        visibility: "simplified"
+	    }]
+	}, {
+	    featureType: "road",
+	    elementType: "labels",
+	    stylers: [{
+	        visibility: "off"
+	    }]
+	}];
+	var styledMap = new google.maps.StyledMapType(styles, {
+	    name: "AmericasMart Parking Map"
+	});
+	var mapOptions = {
+		mapId: 'f0969269568362e9',
+		zoom: 17,
+		center: myLatLng,
+	    scrollwheel: false,
+	    mapTypeControl: true,
+	    mapTypeControlOptions: {
+	        style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+	    },
+	    mapTypeId: google.maps.MapTypeId.ROADMAP
+	}
+
+
+	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    map.mapTypes.set('map_style', styledMap);
+
+	new google.maps.Marker({
+		position: myLatLng,
+		map,
+		icon : 'https://f.hubspotusercontent00.net/hubfs/371301/images/p1.png',
+		title: "Hello World!",
+	});
+}
+</script>
+<style>
+.gmap {
+	position: fixed!important;
+	top:  0;
+	bottom: 0;
+	left: 0;
+	right:  0;
+}
+</style>
+  </body>
+</html>
