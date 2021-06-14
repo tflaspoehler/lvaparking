@@ -58,6 +58,38 @@ function initMap() {
 		icon : 'https://f.hubspotusercontent00.net/hubfs/371301/images/p1.png',
 		title: "Hello World!",
 	});
+
+	var buildingCoords = [
+	                        [
+
+	        {lat: 36.1722672994664, lng: -115.154445432456},
+	        {lat: 36.1719814921903, lng: -115.154016279051},
+	        {lat: 36.1734365001959, lng: -115.151934885038},
+	        {lat: 36.1728042678935, lng: -115.151151680074},
+	        {lat: 36.1709248623012, lng: -115.153866075359},
+	        {lat: 36.1713059435759, lng: -115.155035518387},
+	        {lat: 36.1717130056178, lng: -115.155400298781},
+	    ],    [
+
+	        {lat: 36.1731506971841, lng: -115.151473545128},
+	        {lat: 36.1734624822362, lng: -115.150937103372},
+	        {lat: 36.1732286435634, lng: -115.150658153659},
+	        {lat: 36.1728648931299, lng: -115.151140951239},
+	    ],
+	];
+        buildingCoords.forEach(function(coords) {
+            var newPolygon = new google.maps.Polygon({
+                          paths: coords,
+                          strokeColor: '#555',
+                          strokeOpacity: 0.5,
+                          strokeWeight: 2,
+                          fillColor: '#555',
+                          fillOpacity: 0.25
+                      });
+            newPolygon.setMap(map);
+    });
+
+
 }
 </script>
 <style>
