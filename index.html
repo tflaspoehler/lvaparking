@@ -131,6 +131,14 @@ var buildingCoords = [
   var info = null;
 	var locations = [
 		{
+			position : new google.maps.LatLng(36.16954012917154, -115.15592421099387),
+			map : map,
+			title : '<p style="text-align: center;"><a title="The EXPO Center at World Market Center" href="http://maps.apple.com/?address=435 S. Grand Central Parkway, Las Vegas, NV 89106" style="color: #000;"><strong>The EXPO Center at World Market Center</strong></a> <br /><br />Located in downtown Las Vegas, The Expo at WMCLV offers a beautiful event setting in a vibrant, thriving world-class locale.  With more than 200,000 square feet of exhibit and pre-function space, our facility can easily accommodate tradeshows, corporate events and large scale banquets. For added accessibility, there is an on-site parking garage with more than 3,000 parking spaces.</a></p>',
+	    label: {
+	      className: "imc-map-label"
+	    }
+		},
+		{
 			position : new google.maps.LatLng(36.17194525715237, -115.15350448085596),
 			map : map,
 			title : '<p style="text-align: center;"><a title="North Parking Lot" href="http://maps.apple.com/?address=Las Vegas, NV 89106" style="color: #000;"><strong>North Parking Lot (FREE self-parking)</strong></a> <br /><br />Parking in this lot is available Moday, August 16 –Thursday, August 26 only. Access is off Symphony Park Ave.</p>',
@@ -140,7 +148,7 @@ var buildingCoords = [
 	    }
 		},
 		{
-			position : new google.maps.LatLng(36.17013511930272, -115.15641199542706),
+			position : new google.maps.LatLng(36.170531849307665, -115.15614410553296),
 			map : map,
 			title : '<p style="text-align: center;"><a title="Parking Garage" href="http://maps.apple.com/?address=455 S Grand Central Pkwy, Las Vegas, NV 89106" style="color: #000;"><strong>Parking Garage (FREE self-parking)</strong></a> <br /><br />Self-parking is available in our 3,700-space on-site parking garage, accessible from W. Symphony Park Ave between Martin Luther King Blvd and S. Grand Central Pkwy. as well as from Bonneville Avenue (via the Charleston/Bonneville/Alta offramp from I-15 Northbound).</a></p>',
 	    label: {
@@ -157,21 +165,20 @@ var buildingCoords = [
 	      className: "imc-map-label"
 	    }
 		},
-		{
-			position : new google.maps.LatLng(36.169788676681115, -115.1558004517913),
-			map : map,
-			title : '<p style="text-align: center;"><a title="The EXPO Center at World Market Center" href="http://maps.apple.com/?address=435 S. Grand Central Parkway, Las Vegas, NV 89106" style="color: #000;"><strong>The EXPO Center at World Market Center</strong></a> <br /><br />Located in downtown Las Vegas, The Expo at WMCLV offers a beautiful event setting in a vibrant, thriving world-class locale.  With more than 200,000 square feet of exhibit and pre-function space, our facility can easily accommodate tradeshows, corporate events and large scale banquets. For added accessibility, there is an on-site parking garage with more than 3,000 parking spaces.</a></p>',
-	    label: {
-	      className: "imc-map-label"
-	    }
-		},
   ];
                 /// --
       var current = 0;
       locations.forEach(function(location, index) {
-          locations[index].icon = 'https://www.atlanta-apparel.com/-/media/Atlanta-Apparel/Attend/Travel/Parking/parking_dots.png'; // 'https://maps.google.com/mapfiles/kml/shapes/' + 'parking_lot_maps.png';
-          if (index == locations.length-1) {
-          	locations[index].icon = 'https://www.atlanta-apparel.com/-/media/Atlanta-Apparel/Attend/Travel/Parking/expo.png';
+          locations[index].icon = 'https://www.atlanta-apparel.com/-/media/Atlanta-Apparel/Attend/Travel/Parking/parking_dots.png';
+          // 'https://maps.google.com/mapfiles/kml/shapes/' + 'parking_lot_maps.png';
+          if (index == 0) {
+          	locations[index].icon = {
+								url: 'https://www.atlanta-apparel.com/-/media/Atlanta-Apparel/Attend/Travel/Parking/expo.png',
+                size: new google.maps.Size(30, 30),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(15, 15),
+  							scaledSize: new google.maps.Size(25, 25),
+             };
           }
       });
 
