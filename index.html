@@ -3,6 +3,20 @@
   <head>
     <title>Simple Markers</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <style>
+   .imc-map-label {
+	     color: black!important;
+	     background-color: transparent;
+	     font-family: "Lucida Grande", "Arial", sans-serif;
+	     font-size: 10px;
+	     text-align: center;
+	     width: auto;     
+	     white-space: nowrap;
+	     transform: translateY(2rem);
+	     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+	   }
+	 </style>
+	  </style>
   </head>
   <body>
     <div class="gmap" id="map"></div>
@@ -13,8 +27,9 @@
       async
     ></script>
 <script>
+    var markers = [];
 function initMap() {
-	const myLatLng = { lat: 36.1684717436345, lng: -115.15676233092137 };
+	const myLatLng = { lat: 36.17075164292743, lng: -115.15489604354863 };
 
 	const styles = [{
 	    stylers: []
@@ -52,43 +67,123 @@ function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
     map.mapTypes.set('map_style', styledMap);
 
-	new google.maps.Marker({
-		position: myLatLng,
-		map,
-		icon : 'https://f.hubspotusercontent00.net/hubfs/371301/images/p1.png',
-		title: "Hello World!",
-	});
 
-	var buildingCoords = [
-	                        [
+	// --------------------- //
+	// add building polygons //
+	// --------------------- //
+var buildingCoords = [
+                    
+    [
 
-	        {lat: 36.1722672994664, lng: -115.154445432456},
-	        {lat: 36.1719814921903, lng: -115.154016279051},
-	        {lat: 36.1734365001959, lng: -115.151934885038},
-	        {lat: 36.1728042678935, lng: -115.151151680074},
-	        {lat: 36.1709248623012, lng: -115.153866075359},
-	        {lat: 36.1713059435759, lng: -115.155035518387},
-	        {lat: 36.1717130056178, lng: -115.155400298781},
-	    ],    [
+        {lat: 36.1722672994664, lng: -115.154445432456},
+        {lat: 36.1719814921903, lng: -115.154016279051},
+        {lat: 36.1734365001959, lng: -115.151934885038},
+        {lat: 36.1728042678935, lng: -115.151151680074},
+        {lat: 36.1709248623012, lng: -115.153866075359},
+        {lat: 36.1713059435759, lng: -115.155035518387},
+        {lat: 36.1717130056178, lng: -115.155400298781},
+    ],
+    [
 
-	        {lat: 36.1731506971841, lng: -115.151473545128},
-	        {lat: 36.1734624822362, lng: -115.150937103372},
-	        {lat: 36.1732286435634, lng: -115.150658153659},
-	        {lat: 36.1728648931299, lng: -115.151140951239},
-	    ],
-	];
-        buildingCoords.forEach(function(coords) {
+        {lat: 36.1731506971841, lng: -115.151473545128},
+        {lat: 36.1734624822362, lng: -115.150937103372},
+        {lat: 36.1732286435634, lng: -115.150658153659},
+        {lat: 36.1728648931299, lng: -115.151140951239},
+    ],
+    [
+
+        {lat: 36.1711327250444, lng: -115.155979655877},
+        {lat: 36.170768964882, lng: -115.155346654648},
+        {lat: 36.1692619405078, lng: -115.156741403291},
+        {lat: 36.1696343687674, lng: -115.157428048777},
+    ],
+    [
+
+        {lat: 36.1692619405078, lng: -115.156698487948},
+        {lat: 36.1703878809961, lng: -115.155647062048},
+        {lat: 36.1700674226578, lng: -115.155153535605},
+        {lat: 36.1689328163868, lng: -115.156162046163},
+    ],
+];
+	// --------------------- //
+		let colors = [
+			"#f9a71e",
+			"#f9a71e",
+			"#60a64f",
+			"#46a0bf",
+		];
+	// --------------------- //
+        buildingCoords.forEach(function(coords, index) {
+        	console.log("adding polygon", coords)
             var newPolygon = new google.maps.Polygon({
                           paths: coords,
                           strokeColor: '#555',
                           strokeOpacity: 0.5,
                           strokeWeight: 2,
-                          fillColor: '#555',
+                          fillColor: colors[index],
                           fillOpacity: 0.25
                       });
             newPolygon.setMap(map);
     });
+	// --------------------- //
 
+	// --------------------- //
+  var info = null;
+	var locations = [
+		{
+			position : new google.maps.LatLng(36.17194525715237, -115.15350448085596),
+			map : map,
+			title : '<a title="Building 3 Buyer Parking" href="http://maps.apple.com/?address=250 Spring Street Atlanta, GA 30303">Building 3 Buyer Parking</a>',
+	    label: {
+	      text: "North Parking Lot",
+	      className: "imc-map-label"
+	    }
+		},
+		{
+			position : new google.maps.LatLng(36.17013511930272, -115.15641199542706),
+			map : map,
+			title : '<a title="Building 3 Buyer Parking" href="http://maps.apple.com/?address=250 Spring Street Atlanta, GA 30303">Building 3 Buyer Parking</a>',
+	    label: {
+	      text: "Garage",
+	      className: "imc-map-label"
+	    }
+		},
+		{
+			position : new google.maps.LatLng(36.169788676681115, -115.1558004517913),
+			map : map,
+			title : '<a title="Building 3 Buyer Parking" href="http://maps.apple.com/?address=250 Spring Street Atlanta, GA 30303">Building 3 Buyer Parking</a>',
+	    label: {
+	      text: "EXPO Center",
+	      className: "imc-map-label"
+	    }
+		},
+  ];
+                /// --
+      var current = 0;
+      locations.forEach(function(location, index) {
+          if (location.hasOwnProperty('showBelowMap') && location.showBelowMap) {
+              locations[index].icon = 'https://f.hubspotusercontent00.net/hubfs/371301/images/p1.png';
+              current += 1;
+          }
+      });
+
+  for (var i = 0, length = locations.length; i < length; i++) {
+
+      var marker = new google.maps.Marker(locations[i]);
+      markers.push(marker);
+      markers[markers.length - 1].addListener('click', function() {
+          if (info) {
+              info.close();
+          }
+          var infowindow = new google.maps.InfoWindow({
+              content: this.title
+          });
+          infowindow.open(map, this);
+          // create a reference
+          info = infowindow;
+      });
+  }
+	// --------------------- //
 
 }
 </script>
